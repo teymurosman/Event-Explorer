@@ -1,5 +1,6 @@
 package ru.practicum.statsclient;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
@@ -14,9 +15,10 @@ import java.util.Map;
 @Service
 public class StatsClient extends BaseClient {
 
-    public StatsClient(RestTemplateBuilder restTemplateBuilder) {
+    public StatsClient(RestTemplateBuilder restTemplateBuilder,
+                       @Value("${services.stats-service.uri}") String statsServiceUri) {
         super(restTemplateBuilder
-                .uriTemplateHandler(new DefaultUriBuilderFactory("http://localhost:9090"))
+                .uriTemplateHandler(new DefaultUriBuilderFactory(statsServiceUri))
                 .requestFactory(HttpComponentsClientHttpRequestFactory::new)
                 .build());
     }
