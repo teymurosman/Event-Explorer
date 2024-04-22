@@ -1,13 +1,13 @@
 package ru.practicum.statsdto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
 
 @Data
+@Builder
 public class HitCreateRequest {
 
     @NotBlank(message = "Имя сервиса не может быть пустым.")
@@ -20,6 +20,5 @@ public class HitCreateRequest {
     private String ip;
 
     @NotNull(message = "Дата запроса не может быть пустой.")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime timestamp;
+    private String timestamp;
 }

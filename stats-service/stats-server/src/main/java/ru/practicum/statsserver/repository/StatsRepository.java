@@ -11,22 +11,22 @@ import java.util.List;
 
 public interface StatsRepository extends JpaRepository<EndpointHit, Long> {
 
-    @Query("select new ru.practicum.statsdto.StatsResponse(eh.app as app, eh.uri, count(eh.ip) as hits) " +
-            "from EndpointHit as eh " +
-            "where eh.timestamp between :start and :end " +
-              "and ((:uris) is null or eh.uri in (:uris))" +
-            "group by eh.app, eh.uri " +
-            "order by count(eh.ip) desc")
+    @Query("SELECT new ru.practicum.statsdto.StatsResponse(eh.app as app, eh.uri, count(eh.ip) AS hits)\n" +
+            "FROM EndpointHit AS eh\n" +
+            "WHERE eh.timestamp BETWEEN :start AND :end\n" +
+              "AND ((:uris) IS NULL OR eh.uri IN (:uris))\n" +
+            "GROUP BY eh.app, eh.uri\n" +
+            "ORDER BY COUNT(eh.ip) DESC")
     List<StatsResponse> findAllByTimeStampAndUris(@Param("start") LocalDateTime start,
                                                   @Param("end") LocalDateTime end,
                                                   @Param("uris") List<String> uris);
 
-    @Query("select new ru.practicum.statsdto.StatsResponse(eh.app as app, eh.uri as uri, count(distinct eh.ip) as hits) " +
-            "from EndpointHit as eh " +
-            "where eh.timestamp between :start and :end " +
-            "and ((:uris) is null or eh.uri in (:uris)) " +
-            "group by eh.app, eh.uri " +
-            "order by count(distinct eh.ip) desc")
+    @Query("SELECT new ru.practicum.statsdto.StatsResponse(eh.app as app, eh.uri as uri, COUNT(DISTINCT eh.ip) AS hits)\n" +
+            "FROM EndpointHit AS eh\n" +
+            "WHERE eh.timestamp BETWEEN :start AND :end\n" +
+            "and ((:uris) IS NULL OR eh.uri IN (:uris))\n" +
+            "GROUP BY eh.app, eh.uri\n" +
+            "ORDER BY COUNT(DISTINCT eh.ip) DESC")
     List<StatsResponse> findAllByTimestampAndUrisAndUniqueTrue(@Param("start") LocalDateTime start,
                                                                @Param("end") LocalDateTime end,
                                                                @Param("uris") List<String> uris);
