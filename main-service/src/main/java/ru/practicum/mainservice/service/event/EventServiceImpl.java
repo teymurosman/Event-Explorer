@@ -68,11 +68,11 @@ public class EventServiceImpl implements EventService {
     public EventFullDto add(Long userId, NewEventDto newEventDto) {
         log.debug("Добавление нового события \"{}\" пользователем с id={}", newEventDto.getTitle(), userId);
 
-        Event event = eventMapper.toEvent(newEventDto);
-        if (event.getEventDate().minusHours(2).isBefore(LocalDateTime.now())) {
+        if (!newEventDto.getEventDate().minusHours(2).isAfter(LocalDateTime.now())) {
             throw new DataConflictException("Дата и время проведения события не может быть раньше, " +
                     "чем через два часа от текущего момента.");
         }
+        Event event = eventMapper.toEvent(newEventDto);
 
         event.setInitiator(findUserOrThrow(userId));
         event.setCategory(findCategoryOrThrow(newEventDto.getCategory()));

@@ -25,6 +25,7 @@ public class NewEventDto {
     @Size(min = 20, max = 7000, message = "Описание события должно содержать от 20 до 7000 символов.")
     private String description;
 
+    @NotNull(message = "Дата проведения события должна быть указана.")
     @JsonFormat(pattern = DATE_TIME_PATTERN)
     private LocalDateTime eventDate;
 
