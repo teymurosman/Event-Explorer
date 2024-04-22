@@ -1,4 +1,4 @@
-package ru.practicum.statsclient;
+package ru.practicum.mainservice.statsclient;
 
 import org.springframework.http.*;
 import org.springframework.lang.Nullable;
