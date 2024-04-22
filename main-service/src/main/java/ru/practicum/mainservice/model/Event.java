@@ -1,8 +1,9 @@
 package ru.practicum.mainservice.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import ru.practicum.mainservice.dto.Location;
 
 import javax.persistence.*;
@@ -10,7 +11,8 @@ import java.time.LocalDateTime;
 
 import static ru.practicum.mainservice.common.Constants.DATE_TIME_PATTERN;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "events")
 @NoArgsConstructor

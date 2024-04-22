@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
     public List<UserDto> getUsers(List<Long> ids, int from, int size) {
         log.debug("Получение списка пользователей с парметрами: {}, {}, {}", ids, from, size);
 
-        if (ids == null) {
+        if (ids == null || ids.isEmpty()) {
             return userRepository.findAll(getPageable(from, size)).stream()
                     .map(userMapper::toUserDto)
                     .collect(Collectors.toList());

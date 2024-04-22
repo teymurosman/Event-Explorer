@@ -57,7 +57,7 @@ public class ParticipationRequestServiceImpl implements ParticipationRequestServ
         if (requestRepository.findByRequesterIdAndEventId(userId, event.getId()).isPresent()) {
             throw new DataConflictException("Нельзя отправлять повторные запросы на участие в событии.");
         }
-        if (event.getParticipantLimit() != 0 && event.getParticipantLimit() <= event.getConfirmedRequests()) {
+        if (event.getParticipantLimit() > 0 && event.getParticipantLimit() <= event.getConfirmedRequests()) {
             throw new DataConflictException("У события достигнут лимит запросов на участие.");
         }
 
