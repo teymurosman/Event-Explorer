@@ -92,7 +92,7 @@ public class EventServiceImpl implements EventService {
         LocalDateTime newEventDate = updateEvent.getEventDate();
         if (newEventDate != null) { // Вложенные if, чтобы не бросалось исключении при null полях
             if (!newEventDate.minusHours(2).isAfter(LocalDateTime.now())) {
-                throw new DataConflictException("Дата и время проведения события не может быть раньше, " +
+                throw new ValidationException("Дата и время проведения события не может быть раньше, " +
                         "чем через два часа от текущего момента.");
             } else {
                 event.setEventDate(newEventDate);
