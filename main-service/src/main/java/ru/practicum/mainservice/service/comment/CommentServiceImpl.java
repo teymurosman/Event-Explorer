@@ -99,6 +99,7 @@ public class CommentServiceImpl implements CommentService {
             case "desc":
             case "DESC":
                 sortByCreated = Sort.by(Sort.Direction.DESC, "createdOn");
+                break;
             default:
                 throw new ValidationException("Неверно указан параметр сортировки.");
         }
